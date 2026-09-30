@@ -1,0 +1,68 @@
+name: ci
+
+# What this workflow checks: that benchbook builds and behaves on every platform it
+# supports.
+#
+# What it deliberately does NOT do: run benchmarks. `go test -bench` on a shared
+# runner measures the runner, not the code — the numbers move with the neighbour's
+# CPU steal, the container's CPU shares and the provider's thermal budget. Benchmark
+# results belong on a machine you control, recorded with `benchbook run` (or ingested
+# with `run --from-file`); CI verifies the tool that documents them.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          # Pinned, not "stable": benchbook's go.mod declares go 1.27.0 and the
+          # determinism tests compare bytes, so the toolchain is part of the input.
+          go-version: '1.27.0'
+
+      - name: build
+        run: go build ./...
+
+      - name: vet
+        run: go vet ./...
+
+      - name: gofmt
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          unformatted="$(gofmt -l . | grep -v '^vendor/' || true)"
+          if [ -n "$unformatted" ]; then
+            echo "these files need gofmt:"
+            echo "$unformatted"
+            exit 1
+          fi
+
+      # The suite runs the whole tool through runner.Fake: no git, no Go toolchain,
+      # no benchmarks. It is the same on all three platforms by construction.
+      - name: test
+        run: go test -race ./...
+
+      # The browser comparer duplicates the statistics on purpose; the shared golden
+      # vectors are what keep the two implementations honest.
+      - name: compare.js golden vectors
+        if: runner.os == 'Linux'
+        run: node scripts/test-compare.mjs
+
+      # No network, no CDN: the vendored assets must match the recorded checksums.
+      - name: vendored assets
+        if: runner.os != 'Windows'
+        run: bash scripts/vendor.sh --verify
