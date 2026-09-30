@@ -1,0 +1,16 @@
+File: core.test
+Build ID: dc925f80e0d3babca16318119e89212047ac9ef4
+Type: alloc_space
+Time: 2026-09-30 05:46:21 UTC
+Showing nodes accounting for 236.83kB, 95.85% of 247.09kB total
+Dropped 93 nodes (cum <= 1.24kB)
+Showing top 8 nodes out of 50
+      flat  flat%   sum%        cum   cum%
+     180kB 72.85% 72.85%      180kB 72.85%  regexp.(*bitState).reset
+   16.78kB  6.79% 79.64%    30.84kB 12.48%  example.com/demo/internal/core.users
+   14.06kB  5.69% 85.33%    14.06kB  5.69%  internal/strconv.FormatInt
+    9.39kB  3.80% 89.13%     9.39kB  3.80%  internal/bytealg.MakeNoZero
+    5.06kB  2.05% 91.18%   154.95kB 62.71%  testing.(*B).Run
+    4.80kB  1.94% 93.12%     4.80kB  1.94%  testing.(*B).ResetTimer
+    3.40kB  1.38% 94.50%     3.40kB  1.38%  sync.(*Pool).pinSlow
+    3.33kB  1.35% 95.85%     3.33kB  1.35%  runtime.mallocgc

@@ -1,0 +1,18 @@
+File: core.test
+Build ID: dc925f80e0d3babca16318119e89212047ac9ef4
+Type: cpu
+Time: 2026-09-30 05:46:26 UTC
+Duration: 9.39ms, Total samples = 10ms (106.45%)
+Showing nodes accounting for 10ms, 100% of 10ms total
+Showing top 10 nodes out of 19
+      flat  flat%   sum%        cum   cum%
+      10ms   100%   100%       10ms   100%  internal/runtime/atomic.(*Uint64).Add (inline)
+         0     0%   100%       10ms   100%  runtime.(*gcControllerState).update
+         0     0%   100%       10ms   100%  runtime.(*mcache).nextFree
+         0     0%   100%       10ms   100%  runtime.(*mcache).refill
+         0     0%   100%       10ms   100%  runtime.allocm
+         0     0%   100%       10ms   100%  runtime.gcBgMarkWorker
+         0     0%   100%       10ms   100%  runtime.gcMarkDone
+         0     0%   100%       10ms   100%  runtime.gcMarkTermination
+         0     0%   100%       10ms   100%  runtime.gcMarkTermination.func3
+         0     0%   100%       10ms   100%  runtime.mallocgc

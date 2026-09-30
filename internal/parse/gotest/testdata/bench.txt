@@ -1,0 +1,12 @@
+goos: linux
+goarch: amd64
+pkg: example.com/demo/internal/core
+cpu: Intel(R) Xeon(R) Processor @ 2.60GHz
+BenchmarkFindUser/traditional-2         	  571929	      1899 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFindUser/traditional-2         	  749396	      2110 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFindUser/result-2              	  524692	      2560 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFindUser/result-2              	  609397	      2069 ns/op	       0 B/op	       0 allocs/op
+BenchmarkConcat-2                       	21745886	        60.50 ns/op	      16 B/op	       1 allocs/op
+BenchmarkConcat-2                       	21757058	        55.24 ns/op	      16 B/op	       1 allocs/op
+PASS
+ok  	example.com/demo/internal/core	11.012s

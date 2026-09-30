@@ -1,0 +1,16 @@
+File: core.test
+Build ID: dc925f80e0d3babca16318119e89212047ac9ef4
+Type: alloc_objects
+Time: 2026-09-30 05:46:21 UTC
+Showing nodes accounting for 1630, 90.25% of 1806 total
+Dropped 86 nodes (cum <= 9)
+Showing top 8 nodes out of 57
+      flat  flat%   sum%        cum   cum%
+       900 49.83% 49.83%        900 49.83%  internal/strconv.FormatInt
+       601 33.28% 83.11%        601 33.28%  internal/bytealg.MakeNoZero
+        51  2.82% 85.94%        951 52.66%  example.com/demo/internal/core.users
+        26  1.44% 87.38%         26  1.44%  sync.(*Pool).pinSlow
+        20  1.11% 88.48%         20  1.11%  testing.(*B).ResetTimer
+        12  0.66% 89.15%        118  6.53%  testing.(*B).Run
+        10  0.55% 89.70%         10  0.55%  fmt.(*buffer).writeString (inline)
+        10  0.55% 90.25%         10  0.55%  regexp.(*bitState).reset
