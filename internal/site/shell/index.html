@@ -1,0 +1,50 @@
+<!doctype html>
+<!-- benchbook documentation shell - tool-owned, overwritten on every `benchbook build`.
+     Contains no documentation content and no navigation: everything project-specific
+     comes from manifest.json at runtime. -->
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Documentation</title>
+    <link id="bb-theme-light" rel="stylesheet" href="assets/benchbook/vendor/styles/github.min.css" />
+    <link id="bb-theme-dark" rel="stylesheet" href="assets/benchbook/vendor/styles/github-dark.min.css" disabled />
+    <link rel="stylesheet" href="assets/benchbook/style.css" />
+    <link id="bb-extra-css" rel="stylesheet" href="" disabled />
+  </head>
+  <body>
+    <a class="bb-skip-link" href="#bb-content">Skip to content</a>
+    <header class="bb-header">
+      <button id="bb-sidebar-toggle" class="bb-icon-button" type="button" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <a class="bb-brand" href="#/">
+        <span id="bb-brand-emoji" class="bb-brand-emoji" aria-hidden="true"></span>
+        <span id="bb-brand-title" class="bb-brand-title">Documentation</span>
+      </a>
+      <nav class="bb-header-actions" aria-label="Site actions">
+        <a id="bb-repo-link" class="bb-header-link" href="#" hidden>Repository</a>
+        <button id="bb-theme-toggle" class="bb-icon-button" type="button" aria-label="Switch colour theme">🌗</button>
+      </nav>
+    </header>
+
+    <div class="bb-layout">
+      <aside id="bb-sidebar" class="bb-sidebar" aria-label="Site navigation">
+        <label class="bb-visually-hidden" for="bb-filter">Filter navigation</label>
+        <input id="bb-filter" class="bb-filter" type="search" placeholder="Filter pages…" autocomplete="off" />
+        <nav id="bb-nav" class="bb-nav"></nav>
+      </aside>
+
+      <main id="bb-content" class="bb-main" tabindex="-1">
+        <div id="bb-loading" class="bb-status">Loading documentation…</div>
+        <article id="bb-article" class="bb-markdown" hidden></article>
+        <div id="bb-error" class="bb-status bb-status-error" hidden></div>
+      </main>
+
+      <nav id="bb-toc" class="bb-toc" aria-label="On this page"></nav>
+    </div>
+
+    <script src="assets/benchbook/vendor/highlight.min.js"></script>
+    <script src="assets/benchbook/vendor/marked.min.js"></script>
+    <script src="assets/benchbook/compare.js"></script>
+    <script src="assets/benchbook/app.js"></script>
+  </body>
+</html>
