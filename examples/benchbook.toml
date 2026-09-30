@@ -1,0 +1,78 @@
+# Example benchbook.toml for a Go project.
+#
+# Copy it to the root of your repository and edit the values marked TODO. Everything
+# is optional except [project].name, and unknown keys are rejected so that a typo like
+# `bench.coutn` fails loudly instead of silently using the default.
+#
+# Reference: README.md § Configuration reference.
+
+[project]
+name = "myproject"                    # TODO: the name shown in the site header
+emoji = "📊"                          # badge next to the name; also the favicon
+repo_url = "https://github.com/me/myproject"
+
+[paths]
+# data_dir = "benchbook"              # current.json + history/ — commit this
+# site_dir = "docs"                   # the generated site — publish this
+
+[bench]
+packages = ["./..."]                  # what go test is pointed at
+args = ["-benchmem"]                  # extra flags; -run '^$' -bench=. are always added
+count = 6                             # samples per benchmark: 6 is the sample floor
+timeout = "30m"                       # a full suite gets slow before it gets fast
+baseline_variant = "traditional"      # the variant others are compared against
+
+[stats]
+alpha = 0.05                          # significance level of the test
+min_effect_pct = 1.0                  # a change must be bigger than this to be labelled
+min_samples = 6                       # fewer samples than this cannot be promoted
+noise_floor_note = true               # print the "laptops are noisy" reminder on pages
+
+# Group the report by what a benchmark measures. First match wins, and matching is on
+# word boundaries, so "WithTry" never matches "WithoutTry".
+[[category]]
+title = "🧠 CPU bound"
+match = ["Parse", "Encode", "Marshal"]
+
+[[category]]
+title = "🔎 Lookups"
+match = ["Find", "Lookup", "Index"]
+
+[category_default]
+title = "⚡ Basic operations"            # everything that matched nothing above
+
+# Which benchmarks headline the timeline. Use "Workload/variant" to track one variant,
+# or just "Workload" to track every variant of it.
+[tracked]
+benchmarks = ["FindUser/result", "Concat"]
+
+# One package worth profiling: a profile of `./...` is a profile of nothing in
+# particular. `benchbook profile` captures each kind and keeps the pprof -top table.
+[profile]
+package = "./internal/core"           # TODO: your hot package
+top = 20
+kinds = ["cpu", "mem_space", "mem_objects"]
+
+[site]
+title = "myproject performance"
+default_theme = "light"               # light | dark | system
+highlight_langs = ["go", "bash", "toml", "json", "diff"]
+loading_text = "Loading documentation... (๑•̀ㅂ•́)و✧"
+not_found_text = "Looks like this page wandered off... (╥_╥)"
+# extra_css = "docs/theme/custom.css" # copied into the site next to the shell assets
+
+# Authored navigation. Generated pages (Benchmarks, Profiling, Timeline, Compare) are
+# merged into a "Performance" section automatically, and milestones get their own
+# collapsible section.
+[[nav]]
+section = "Getting Started"
+pages = [
+  { title = "Introduction", path = "content/home.md" },
+]
+
+# Optional: rename benchmarks whose names do not follow the WorkloadVariant convention,
+# without touching the Go code.
+# [[group_rule]]
+# contains = "ErrorHandling"
+# exclude = "WithoutTry"
+# workload = "ErrorHandling"
